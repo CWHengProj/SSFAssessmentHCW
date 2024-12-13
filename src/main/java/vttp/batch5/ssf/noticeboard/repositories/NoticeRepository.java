@@ -25,5 +25,9 @@ public class NoticeRepository {
         
     }
 
+    public String getPayLoad() {
+		return (String) template.opsForHash().get("SSFProj","jsonPayload");
+    }
+
 
 }

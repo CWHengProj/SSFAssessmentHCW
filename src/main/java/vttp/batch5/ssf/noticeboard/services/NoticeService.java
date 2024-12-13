@@ -36,5 +36,8 @@ public class NoticeService {
 		return null;
 		//return error page if failed
 	}
+    public String getPayLoad() {
+		return noticeRepo.getPayLoad();
+	}
 
 }
