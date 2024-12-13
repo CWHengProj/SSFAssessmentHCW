@@ -64,8 +64,6 @@ public class NoticeController {
 
         //add conditional to check for the response
         if (rresult==null){
-            String message = "I/O error on POST request for \"http://localhost:3000/notice\": Connection refused";
-            model.addAttribute("message",message);
             String errorMessage = noticeService.getErrorMessage();
             model.addAttribute("errorMessage",errorMessage);
             return "failure";
