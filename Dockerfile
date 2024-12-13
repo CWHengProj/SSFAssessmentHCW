@@ -14,7 +14,7 @@ COPY src src
 # Ensure the mvnw script has execution permissions
 RUN chmod +x mvnw.cmd
 # Build the application; might have to use mvn instead of /mvnw
-RUN mvnw.cmd clean package -Dmaven.test.skip=true 
+RUN mvn clean package -Dmaven.test.skip=true 
 
 
 #Stage 2
@@ -25,7 +25,6 @@ ARG DEPLOY_DIR=/code_folder
 WORKDIR ${DEPLOY_DIR}
 
 COPY --from=compiler /app/target/noticeboard-0.0.1-SNAPSHOT.jar ssfAssessment.jar
-COPY filetoManipulate.csv .
 
 # Set the server port
 ENV SERVER_PORT=4000

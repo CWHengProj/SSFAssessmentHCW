@@ -1,6 +1,7 @@
 package vttp.batch5.ssf.noticeboard.controllers;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.validation.Valid;
 import vttp.batch5.ssf.noticeboard.models.Notice;
 import vttp.batch5.ssf.noticeboard.services.NoticeService;
@@ -39,12 +43,18 @@ public class NoticeController {
         if(result.hasErrors()){
             return "notice";
         }
-        //perform the request to make an exchange if successful using the info that i have.
-         JsonObject responseJson = Json.createObjectBuilder()
+        List<String> categoryArray = notice.getCategoriesList();
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        
+        for (String category: categoryArray){
+            jab.add(category);    
+        }
+        JsonArray catObj = jab.build();
+        JsonObject responseJson  = Json.createObjectBuilder()
                         .add("title",notice.getTitle())
                         .add("poster",notice.getPoster())
                         .add("postDate",notice.getPostDateLong())
-                        .add("categories",notice.getCategories())//TODO change the type so that the formatting of the json is correct
+                        .add("categories",catObj)//TODO change the type so that the formatting of the json is correct
                         .add("text",notice.getText())
                         .build();
         System.out.println(responseJson);

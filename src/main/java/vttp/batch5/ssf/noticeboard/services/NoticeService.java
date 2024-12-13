@@ -22,8 +22,7 @@ public class NoticeService {
 		RestTemplate rt = new RestTemplate();
 		//exchange with the server
 		try{
-
-			ResponseEntity<JsonObject> serverResponse = rt.exchange(url, HttpMethod.GET, rq, JsonObject.class);
+			ResponseEntity<JsonObject> serverResponse = rt.exchange(url, HttpMethod.POST, rq, JsonObject.class);
 			String id = serverResponse.getBody().getString("id");
 			//convert idJson to a string type
 			noticeRepo.insertNotices(id,serverResponse);
