@@ -22,7 +22,7 @@ public class AppConfig {
   private Integer dbPort;
 
   @Value("${noticeboard.db.database}")
-  private Integer dbNumber;
+  private Integer dbNumber; 
 
   @Value("${noticeboard.db.username}")
   private String dbUsername;
