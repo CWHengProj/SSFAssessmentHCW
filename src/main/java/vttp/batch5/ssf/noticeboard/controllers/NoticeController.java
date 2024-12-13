@@ -44,7 +44,7 @@ public class NoticeController {
                         .add("title",notice.getTitle())
                         .add("poster",notice.getPoster())
                         .add("postDate",notice.getPostDateLong())
-                        .add("categories",notice.getCategoriesList().toString())
+                        .add("categories",notice.getCategories())//TODO change the type so that the formatting of the json is correct
                         .add("text",notice.getText())
                         .build();
         System.out.println(responseJson);
@@ -54,15 +54,17 @@ public class NoticeController {
         ResponseEntity<JsonObject> rresult = noticeService.postToNoticeServer(responseJson,headers);       
 
         //add conditional to check for the response
-        if (rresult.getBody().getString("id")==null){
+        if (rresult==null){
             String message = "I/O error on POST request for \"http://localhost:3000/notice\": Connection refused";
             model.addAttribute("message",message);
-            String errorMessage = noticeService.getPayLoad();
+            String errorMessage = noticeService.getErrorMessage();
             model.addAttribute("errorMessage",errorMessage);
             return "failure";
-        }
+        } 
         else{
-            String message = "The notice posting id is "+ noticeService.getPayLoad();
+            //how to get unique id?
+            String id = rresult.getBody().getString("id");
+            String message = "The notice posting id is "+ noticeService.getPayLoad(id);
             model.addAttribute("message",message);
             return "success";
         }

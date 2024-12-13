@@ -75,7 +75,7 @@ public class Notice {
     
     
     public long getPostDateLong() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         Date d = sdf.parse(postDate.toString());
         long milliseconds = d.getTime();
         return milliseconds;
