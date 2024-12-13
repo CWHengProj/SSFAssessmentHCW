@@ -18,7 +18,6 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
 import jakarta.validation.Valid;
 import vttp.batch5.ssf.noticeboard.models.Notice;
 import vttp.batch5.ssf.noticeboard.services.NoticeService;
@@ -54,7 +53,7 @@ public class NoticeController {
                         .add("title",notice.getTitle())
                         .add("poster",notice.getPoster())
                         .add("postDate",notice.getPostDateLong())
-                        .add("categories",catObj)//TODO change the type so that the formatting of the json is correct
+                        .add("categories",catObj)
                         .add("text",notice.getText())
                         .build();
         System.out.println(responseJson);

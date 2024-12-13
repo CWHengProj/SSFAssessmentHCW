@@ -3,6 +3,7 @@ package vttp.batch5.ssf.noticeboard.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class NoticeService {
 	NoticeRepository noticeRepo;
 	@Value("${noticeboard.db.url}")
   	private String url;
-	public ResponseEntity<JsonObject> postToNoticeServer(JsonObject requestJson, org.springframework.http.HttpHeaders headers) {
+	//TODO NOTE - why is my manual printing of the json object that i have created working when i put in postman, but it returns payload format error here?
+	public ResponseEntity<JsonObject> postToNoticeServer(JsonObject requestJson, HttpHeaders headers) {
 		RequestEntity<JsonObject> rq = RequestEntity.put(url).headers(headers).body(requestJson);
 		RestTemplate rt = new RestTemplate();
 		//exchange with the server
