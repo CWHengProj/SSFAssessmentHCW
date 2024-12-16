@@ -20,6 +20,7 @@ public class NoticeService {
   	private String url;
 	//TODO NOTE - why is my manual printing of the json object that i have created working when i put in postman, but it returns payload format error here?
 	public ResponseEntity<JsonObject> postToNoticeServer(JsonObject requestJson, HttpHeaders headers) {
+		// RequestEntity<JsonObject> rq = RequestEntity.put(url).headers(headers).body(requestJson);
 		RequestEntity<JsonObject> rq = RequestEntity.put(url).headers(headers).body(requestJson);
 		RestTemplate rt = new RestTemplate();
 		//exchange with the server
